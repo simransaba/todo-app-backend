@@ -29,7 +29,7 @@ const JWT_OPTIONS = {
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:3000', // Updated to localhost
+    origin: ['https://todo-app-frontend.onrender.com', 'http://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -43,7 +43,7 @@ app.use(helmet({
             scriptSrc: ["'self'", "'unsafe-inline'"],
             styleSrc: ["'self'", "'unsafe-inline'"],
             imgSrc: ["'self'", 'data:', 'https:'],
-            connectSrc: ["'self'", "http://localhost:5000"], // Updated to localhost
+            connectSrc: ["'self'", "https://todo-app-backend-n30f.onrender.com"],
         },
     }
 }));
@@ -71,7 +71,7 @@ app.use('/api/', limiter);
 // Auth route limiter
 const authLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 20, // Increased from 5 to 20 attempts
+    max: 20, // Increased for testing
     message: 'Too many login attempts, please try again later'
 });
 app.use('/api/auth/', authLimiter);
@@ -280,8 +280,7 @@ app.post('/api/todos', auth, async (req, res) => {
     try {
         const { text } = req.body;
         
-        // Updated to use localhost
-        const shareableLink = `http://localhost:3000/todo/${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const shareableLink = `https://todo-app-frontend.onrender.com/todo/${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         
         if (!text || text.trim().length === 0) {
             return res.status(400).json({ error: 'Todo text is required' });
