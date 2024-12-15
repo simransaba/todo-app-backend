@@ -29,7 +29,7 @@ const JWT_OPTIONS = {
 
 // Middleware
 app.use(cors({
-    origin: ['https://todo-app-frontend.onrender.com', 'http://localhost:3000'],
+    origin: ['https://todo-app-frontend-xxxx.onrender.com', 'http://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
